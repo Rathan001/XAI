@@ -1,0 +1,278 @@
+@import "@fontsource/playfair-display/400.css";
+@import "@fontsource/playfair-display/600.css";
+@import "@fontsource/playfair-display/700.css";
+@import "@fontsource/dm-sans/400.css";
+@import "@fontsource/dm-sans/500.css";
+@import "@fontsource/dm-sans/600.css";
+@import "@fontsource/dm-sans/700.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Traditional Banking Design System - XAI Banking Application
+   Colors: Deep navy blues, warm golds, clean whites
+   Typography: Playfair Display (headings) + DM Sans (body)
+   Focus: Trust, clarity, professionalism
+*/
+
+@layer base {
+  :root {
+    /* Core backgrounds */
+    --background: 210 20% 98%;
+    --foreground: 220 30% 15%;
+
+    /* Card surfaces */
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 15%;
+
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 15%;
+
+    /* Primary: Deep Navy Blue */
+    --primary: 220 55% 18%;
+    --primary-foreground: 45 40% 95%;
+
+    /* Secondary: Light slate */
+    --secondary: 220 15% 94%;
+    --secondary-foreground: 220 30% 25%;
+
+    /* Muted */
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 10% 45%;
+
+    /* Accent: Rich Gold */
+    --accent: 40 75% 50%;
+    --accent-foreground: 220 55% 12%;
+
+    /* Destructive */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders */
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 220 55% 18%;
+
+    /* Radius */
+    --radius: 0.5rem;
+
+    /* Custom colors for banking */
+    --navy: 220 55% 18%;
+    --navy-light: 220 45% 28%;
+    --navy-dark: 220 60% 12%;
+    --gold: 40 75% 50%;
+    --gold-light: 42 85% 65%;
+    --gold-dark: 38 70% 40%;
+    --success: 152 60% 40%;
+    --success-light: 152 60% 95%;
+    --warning: 35 90% 50%;
+    --warning-light: 35 90% 95%;
+    --info: 205 75% 50%;
+    --info-light: 205 75% 95%;
+
+    /* Confidence score colors */
+    --confidence-high: 152 60% 40%;
+    --confidence-medium: 40 75% 50%;
+    --confidence-low: 0 72% 51%;
+
+    /* XAI Explanation colors */
+    --explanation-bg: 220 25% 97%;
+    --explanation-border: 220 20% 90%;
+    --factor-positive: 152 60% 40%;
+    --factor-negative: 0 72% 51%;
+    --factor-neutral: 220 10% 45%;
+
+    /* Sidebar */
+    --sidebar-background: 220 55% 18%;
+    --sidebar-foreground: 45 40% 95%;
+    --sidebar-primary: 40 75% 50%;
+    --sidebar-primary-foreground: 220 55% 12%;
+    --sidebar-accent: 220 45% 25%;
+    --sidebar-accent-foreground: 45 40% 95%;
+    --sidebar-border: 220 45% 25%;
+    --sidebar-ring: 40 75% 50%;
+
+    /* Typography */
+    --font-heading: "Playfair Display", serif;
+    --font-body: "DM Sans", sans-serif;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(220, 55%, 18%) 0%, hsl(220, 45%, 28%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(40, 75%, 50%) 0%, hsl(42, 85%, 65%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(220, 55%, 18%) 0%, hsl(220, 60%, 12%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0, 0%, 100%) 0%, hsl(210, 20%, 98%) 100%);
+    --gradient-explanation: linear-gradient(135deg, hsl(220, 25%, 97%) 0%, hsl(40, 30%, 97%) 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(220 30% 15% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(220 30% 15% / 0.08), 0 2px 4px -2px hsl(220 30% 15% / 0.05);
+    --shadow-lg: 0 10px 15px -3px hsl(220 30% 15% / 0.1), 0 4px 6px -4px hsl(220 30% 15% / 0.05);
+    --shadow-xl: 0 20px 25px -5px hsl(220 30% 15% / 0.1), 0 8px 10px -6px hsl(220 30% 15% / 0.05);
+    --shadow-gold: 0 4px 14px 0 hsl(40 75% 50% / 0.25);
+    --shadow-card: 0 2px 8px hsl(220 30% 15% / 0.06), 0 1px 2px hsl(220 30% 15% / 0.04);
+  }
+
+  .dark {
+    --background: 220 30% 8%;
+    --foreground: 210 20% 95%;
+
+    --card: 220 30% 12%;
+    --card-foreground: 210 20% 95%;
+
+    --popover: 220 30% 12%;
+    --popover-foreground: 210 20% 95%;
+
+    --primary: 40 75% 50%;
+    --primary-foreground: 220 55% 12%;
+
+    --secondary: 220 25% 18%;
+    --secondary-foreground: 210 20% 90%;
+
+    --muted: 220 25% 18%;
+    --muted-foreground: 220 15% 60%;
+
+    --accent: 40 75% 50%;
+    --accent-foreground: 220 55% 12%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 25% 20%;
+    --input: 220 25% 20%;
+    --ring: 40 75% 50%;
+
+    --sidebar-background: 220 30% 8%;
+    --sidebar-foreground: 210 20% 95%;
+    --sidebar-primary: 40 75% 50%;
+    --sidebar-primary-foreground: 220 55% 12%;
+    --sidebar-accent: 220 25% 15%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-border: 220 25% 18%;
+    --sidebar-ring: 40 75% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@layer components {
+  /* Card hover effect */
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+    box-shadow: var(--shadow-card);
+  }
+  .card-hover:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  /* Gold accent border */
+  .gold-accent {
+    position: relative;
+  }
+  .gold-accent::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--gradient-gold);
+    border-radius: 4px 0 0 4px;
+  }
+
+  /* XAI Explanation styling */
+  .xai-explanation {
+    background: var(--gradient-explanation);
+    border: 1px solid hsl(var(--explanation-border));
+    border-radius: var(--radius);
+  }
+
+  /* Confidence badge */
+  .confidence-high {
+    @apply bg-success/10 text-success border-success/30;
+  }
+  .confidence-medium {
+    @apply bg-warning/10 text-warning border-warning/30;
+  }
+  .confidence-low {
+    @apply bg-destructive/10 text-destructive border-destructive/30;
+  }
+
+  /* Banking gradient text */
+  .gradient-text {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Hero section styling */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+
+  /* Stat card glow */
+  .stat-glow {
+    box-shadow: var(--shadow-card);
+  }
+  .stat-glow:hover {
+    box-shadow: var(--shadow-gold);
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from { 
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to { 
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}

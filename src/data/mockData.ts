@@ -1,0 +1,365 @@
+import { 
+  Transaction, 
+  AIRecommendation, 
+  SpendingInsight, 
+  DashboardStats,
+  CategoryData 
+} from '@/types/banking';
+
+// Mock Transactions - Indian context
+export const mockTransactions: Transaction[] = [
+  {
+    id: '1',
+    date: new Date('2024-12-20'),
+    description: 'Salary Credit - December',
+    amount: 75000,
+    type: 'credit',
+    category: 'income',
+  },
+  {
+    id: '2',
+    date: new Date('2024-12-19'),
+    description: 'Swiggy Order',
+    amount: 450,
+    type: 'debit',
+    category: 'food',
+    merchant: 'Swiggy',
+    upiId: 'swiggy@upi',
+  },
+  {
+    id: '3',
+    date: new Date('2024-12-18'),
+    description: 'Amazon Shopping',
+    amount: 2499,
+    type: 'debit',
+    category: 'shopping',
+    merchant: 'Amazon India',
+  },
+  {
+    id: '4',
+    date: new Date('2024-12-17'),
+    description: 'Electricity Bill - BESCOM',
+    amount: 1850,
+    type: 'debit',
+    category: 'bills',
+  },
+  {
+    id: '5',
+    date: new Date('2024-12-16'),
+    description: 'Uber Ride',
+    amount: 320,
+    type: 'debit',
+    category: 'travel',
+    merchant: 'Uber India',
+  },
+  {
+    id: '6',
+    date: new Date('2024-12-15'),
+    description: 'Netflix Subscription',
+    amount: 649,
+    type: 'debit',
+    category: 'entertainment',
+  },
+  {
+    id: '7',
+    date: new Date('2024-12-14'),
+    description: 'BigBasket Groceries',
+    amount: 3200,
+    type: 'debit',
+    category: 'groceries',
+    merchant: 'BigBasket',
+  },
+  {
+    id: '8',
+    date: new Date('2024-12-13'),
+    description: 'Zomato Order',
+    amount: 580,
+    type: 'debit',
+    category: 'food',
+    merchant: 'Zomato',
+  },
+  {
+    id: '9',
+    date: new Date('2024-12-12'),
+    description: 'House Rent',
+    amount: 18000,
+    type: 'debit',
+    category: 'rent',
+  },
+  {
+    id: '10',
+    date: new Date('2024-12-10'),
+    description: 'SIP Investment - HDFC Flexi Cap',
+    amount: 5000,
+    type: 'debit',
+    category: 'investment',
+  },
+  {
+    id: '11',
+    date: new Date('2024-12-08'),
+    description: 'Car Loan EMI',
+    amount: 12500,
+    type: 'debit',
+    category: 'emi',
+  },
+  {
+    id: '12',
+    date: new Date('2024-12-05'),
+    description: 'Apollo Pharmacy',
+    amount: 890,
+    type: 'debit',
+    category: 'healthcare',
+    merchant: 'Apollo Pharmacy',
+  },
+];
+
+// Mock AI Recommendations with XAI explanations
+export const mockRecommendations: AIRecommendation[] = [
+  {
+    id: 'rec-1',
+    title: 'Reduce Food Delivery Spending',
+    description: 'Your food delivery expenses are 35% higher than your average. Consider cooking at home 2-3 times more per week.',
+    expectedBenefit: 'Save approximately ₹2,500-3,000 per month',
+    expectedSavings: 2750,
+    confidenceScore: 87,
+    confidenceLevel: 'high',
+    category: 'spending',
+    priority: 'high',
+    explanation: {
+      why: 'Analysis of your last 3 months of transactions shows a consistent increase in food delivery orders, particularly on weekdays. This pattern suggests convenience-driven spending that can be optimized.',
+      factors: [
+        {
+          factor: 'Weekday Ordering Frequency',
+          impact: 'negative',
+          weight: 0.4,
+          description: '78% of food orders placed on weekdays between 7-9 PM',
+        },
+        {
+          factor: 'Average Order Value',
+          impact: 'negative',
+          weight: 0.35,
+          description: 'Average order ₹520 vs market average ₹380',
+        },
+        {
+          factor: 'Month-over-Month Growth',
+          impact: 'negative',
+          weight: 0.25,
+          description: '15% increase compared to previous month',
+        },
+      ],
+      methodology: 'Rule-based analysis comparing your spending against your income bracket and regional averages for similar demographics in urban India.',
+      dataPoints: 45,
+      timeframeAnalyzed: 'Last 90 days',
+    },
+    actionable: true,
+    createdAt: new Date('2024-12-20'),
+  },
+  {
+    id: 'rec-2',
+    title: 'Optimize EMI Payments',
+    description: 'Your Car Loan EMI timing can be adjusted to align better with your salary credit date for improved cash flow.',
+    expectedBenefit: 'Avoid potential overdraft and improve credit score',
+    confidenceScore: 92,
+    confidenceLevel: 'high',
+    category: 'budget',
+    priority: 'medium',
+    explanation: {
+      why: 'Your salary is credited on the 20th, but EMI is debited on the 8th. This 12-day gap creates cash flow pressure in the first week of each month.',
+      factors: [
+        {
+          factor: 'Salary-EMI Gap',
+          impact: 'negative',
+          weight: 0.5,
+          description: '12 days between salary credit and EMI debit',
+        },
+        {
+          factor: 'Low Balance Instances',
+          impact: 'negative',
+          weight: 0.3,
+          description: 'Balance dropped below ₹5,000 on 3 occasions before EMI',
+        },
+        {
+          factor: 'Consistent Salary Pattern',
+          impact: 'positive',
+          weight: 0.2,
+          description: 'Regular salary credit on 20th for past 6 months',
+        },
+      ],
+      methodology: 'Cash flow analysis correlating income patterns with fixed expense timings.',
+      dataPoints: 24,
+      timeframeAnalyzed: 'Last 6 months',
+    },
+    actionable: true,
+    createdAt: new Date('2024-12-19'),
+  },
+  {
+    id: 'rec-3',
+    title: 'Increase SIP by ₹2,000',
+    description: 'Based on your spending patterns and income stability, you can safely increase your monthly SIP investment.',
+    expectedBenefit: 'Additional ₹3.2 lakhs corpus in 5 years at 12% returns',
+    expectedSavings: 320000,
+    confidenceScore: 78,
+    confidenceLevel: 'medium',
+    category: 'investment',
+    priority: 'medium',
+    explanation: {
+      why: 'Your current savings rate is 18%, which is good. However, analysis shows you have consistent surplus of ₹3,000-4,000 that remains idle in savings account.',
+      factors: [
+        {
+          factor: 'Monthly Surplus',
+          impact: 'positive',
+          weight: 0.45,
+          description: 'Average idle balance of ₹3,500 in savings account',
+        },
+        {
+          factor: 'Income Stability',
+          impact: 'positive',
+          weight: 0.35,
+          description: 'Consistent salary for 12+ months with no variations',
+        },
+        {
+          factor: 'Emergency Fund Status',
+          impact: 'positive',
+          weight: 0.2,
+          description: 'Adequate emergency fund covering 4 months expenses',
+        },
+      ],
+      methodology: 'Investment capacity analysis based on disposable income and existing financial commitments.',
+      dataPoints: 52,
+      timeframeAnalyzed: 'Last 12 months',
+    },
+    actionable: true,
+    createdAt: new Date('2024-12-18'),
+  },
+  {
+    id: 'rec-4',
+    title: 'Bill Payment Reminder',
+    description: 'Your electricity bill is due in 3 days. Set up auto-pay to avoid late payment charges.',
+    expectedBenefit: 'Save ₹150-200 in late payment fees annually',
+    expectedSavings: 175,
+    confidenceScore: 95,
+    confidenceLevel: 'high',
+    category: 'alert',
+    priority: 'high',
+    explanation: {
+      why: 'Historical analysis shows you\'ve paid electricity bills late 4 times in the past year, incurring additional charges.',
+      factors: [
+        {
+          factor: 'Past Late Payments',
+          impact: 'negative',
+          weight: 0.6,
+          description: '4 late payments in last 12 months',
+        },
+        {
+          factor: 'Bill Amount Consistency',
+          impact: 'positive',
+          weight: 0.25,
+          description: 'Consistent bill range ₹1,500-2,000',
+        },
+        {
+          factor: 'Account Balance',
+          impact: 'positive',
+          weight: 0.15,
+          description: 'Sufficient balance available for auto-debit',
+        },
+      ],
+      methodology: 'Payment pattern analysis with due date tracking and balance verification.',
+      dataPoints: 12,
+      timeframeAnalyzed: 'Last 12 months',
+    },
+    actionable: true,
+    createdAt: new Date('2024-12-20'),
+  },
+];
+
+// Mock Spending Insights
+export const mockSpendingInsights: SpendingInsight[] = [
+  {
+    category: 'food',
+    thisMonth: 8500,
+    lastMonth: 6200,
+    average: 6800,
+    trend: 'up',
+    percentageChange: 37,
+  },
+  {
+    category: 'shopping',
+    thisMonth: 4500,
+    lastMonth: 7200,
+    average: 5500,
+    trend: 'down',
+    percentageChange: -38,
+  },
+  {
+    category: 'bills',
+    thisMonth: 3200,
+    lastMonth: 3100,
+    average: 3150,
+    trend: 'stable',
+    percentageChange: 3,
+  },
+  {
+    category: 'travel',
+    thisMonth: 2800,
+    lastMonth: 3500,
+    average: 3000,
+    trend: 'down',
+    percentageChange: -20,
+  },
+  {
+    category: 'entertainment',
+    thisMonth: 1500,
+    lastMonth: 1800,
+    average: 1600,
+    trend: 'down',
+    percentageChange: -17,
+  },
+];
+
+// Mock Dashboard Stats
+export const mockDashboardStats: DashboardStats = {
+  totalBalance: 45230,
+  monthlyIncome: 75000,
+  monthlyExpenses: 48500,
+  savingsRate: 35.3,
+  topCategory: 'rent',
+  transactionCount: 87,
+};
+
+// Category colors for charts
+export const categoryColors: Record<string, string> = {
+  food: '#e67e22',
+  shopping: '#9b59b6',
+  bills: '#3498db',
+  travel: '#1abc9c',
+  entertainment: '#e74c3c',
+  groceries: '#27ae60',
+  healthcare: '#16a085',
+  education: '#2980b9',
+  income: '#2ecc71',
+  transfer: '#95a5a6',
+  investment: '#f39c12',
+  emi: '#8e44ad',
+  rent: '#c0392b',
+  utilities: '#34495e',
+};
+
+// Mock category distribution for pie chart
+export const mockCategoryData: CategoryData[] = [
+  { name: 'Rent', value: 18000, color: '#c0392b', percentage: 37 },
+  { name: 'EMI', value: 12500, color: '#8e44ad', percentage: 26 },
+  { name: 'Food', value: 8500, color: '#e67e22', percentage: 17 },
+  { name: 'Investment', value: 5000, color: '#f39c12', percentage: 10 },
+  { name: 'Groceries', value: 3200, color: '#27ae60', percentage: 7 },
+  { name: 'Others', value: 1300, color: '#95a5a6', percentage: 3 },
+];
+
+// Monthly spending trend data
+export const monthlySpendingTrend = [
+  { month: 'Jul', income: 75000, expenses: 52000, savings: 23000 },
+  { month: 'Aug', income: 75000, expenses: 48000, savings: 27000 },
+  { month: 'Sep', income: 75000, expenses: 55000, savings: 20000 },
+  { month: 'Oct', income: 80000, expenses: 51000, savings: 29000 },
+  { month: 'Nov', income: 80000, expenses: 49000, savings: 31000 },
+  { month: 'Dec', income: 75000, expenses: 48500, savings: 26500 },
+];
